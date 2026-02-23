@@ -10,6 +10,7 @@ A simple REST API built with NestJS, TypeScript, and SQLite that allows users to
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [API Documentation](#api-documentation)
+- [API Screenshots] (#api-screenshots)
 - [Project Structure](#project-structure)
 - [Design Decisions](#design-decisions)
 
@@ -42,7 +43,7 @@ A simple REST API built with NestJS, TypeScript, and SQLite that allows users to
 
 ```bash
 git clone <repository-url>
-cd tribaverse-api
+cd tribaverse-api-task
 ```
 
 1. Install dependencies:
@@ -296,6 +297,32 @@ curl -X POST http://localhost:3000/posts \
 ```bash
 curl http://localhost:3000/posts?page=1&limit=10
 ```
+
+## API Screenshots
+
+![User Registration Success](screenshots/register-user.png)
+_Successful user registration_
+
+![User Login Success](screenshots/login-user.png)
+_Successful user login_
+
+![Create Post Success](screenshots/create-post.png)
+_Successful post creation_
+
+![Retrieve Paginated Posts](screenshots/retrieve-paginated-posts.png)
+_Retrieved paginated list of posts_
+
+![Email Validation](screenshots/email-validation.png)
+_Email validation checks_
+
+![Valid Credentials Check](screenshots/valid-credentials-check.png)
+_Valid user and password checks_
+
+![Empty Post Content](screenshots/empty-post-content.png)
+_Valid post content check_
+
+![Missing JWT](screenshots/missing-jwt.png)
+_Authentication check_
 
 ## Project Structure
 
