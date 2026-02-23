@@ -10,7 +10,7 @@ A simple REST API built with NestJS, TypeScript, and SQLite that allows users to
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [API Documentation](#api-documentation)
-- [API Screenshots] (#api-screenshots)
+- [API Screenshots](#api-screenshots)
 - [Project Structure](#project-structure)
 - [Design Decisions](#design-decisions)
 
