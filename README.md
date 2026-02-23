@@ -1,98 +1,404 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Tribaverse API - REST API Assignment
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple REST API built with NestJS, TypeScript, and SQLite that allows users to create accounts, authenticate, and create/retrieve posts with pagination.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Documentation](#api-documentation)
+- [Project Structure](#project-structure)
+- [Design Decisions](#design-decisions)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- ✅ User registration and authentication (JWT)
+- ✅ Create and retrieve text-based posts
+- ✅ Pagination support for posts listing
+- ✅ Input validation and error handling
+- ✅ Clean, modular architecture
+- ✅ SQLite database (no external setup required)
 
-```bash
-$ npm install
-```
+## Tech Stack
 
-## Compile and run the project
+- **Framework**: NestJS
+- **Language**: TypeScript
+- **Database**: SQLite (sql.js driver)
+- **ORM**: TypeORM
+- **Authentication**: JWT (Passport)
+- **Validation**: class-validator, class-transformer
 
-```bash
-# development
-$ npm run start
+## Prerequisites
 
-# watch mode
-$ npm run start:dev
+- Node.js (v24 or higher)
+- npm or yarn
 
-# production mode
-$ npm run start:prod
-```
+## Installation
 
-## Run tests
+1. Clone the repository:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone <repository-url>
+cd tribaverse-api
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+1. Install dependencies:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+1. Create a `.env` file in the root directory (copy from `.env.example`):
 
-## Resources
+```bash
+cp .env.example .env
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+1. Update the `.env` file with your configuration:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```env
+JWT_SECRET=super-secret-key
+JWT_EXPIRATION=24h
+PORT=3000
+```
 
-## Support
+## Running the Application
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Development Mode
 
-## Stay in touch
+```bash
+npm run start:dev
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The API will be available at `http://localhost:3000`
+
+### Production Mode
+
+```bash
+npm run build
+npm run start:prod
+```
+
+## API Documentation
+
+### Base URL
+
+```
+http://localhost:3000
+```
+
+### Endpoints
+
+#### 1. Register a New User
+
+**POST** `/auth/register`
+
+Creates a new user account.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword123",
+  "username": "johndoe"
+}
+```
+
+**Response (201 Created):**
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "uuid-here",
+    "email": "user@example.com",
+    "username": "johndoe"
+  }
+}
+```
+
+**Validation Rules:**
+
+- Email must be a valid email address
+- Password must be at least 6 characters
+- Username must be at least 3 characters
+
+**Error Responses:**
+
+- `400 Bad Request` - Invalid input data
+- `409 Conflict` - Email already exists
+
+---
+
+#### 2. Login
+
+**POST** `/auth/login`
+
+Authenticates a user and returns a JWT token.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword123"
+}
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "uuid-here",
+    "email": "user@example.com",
+    "username": "johndoe"
+  }
+}
+```
+
+**Error Responses:**
+
+- `401 Unauthorized` - Invalid credentials
+
+---
+
+#### 3. Create a Post
+
+**POST** `/posts`
+
+Creates a new post (requires authentication).
+
+**Headers:**
+
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+**Request Body:**
+
+```json
+{
+  "content": "This is my first post on Tribaverse!"
+}
+```
+
+**Response (201 Created):**
+
+```json
+{
+  "message": "Post created successfully",
+  "post": {
+    "id": "uuid-here",
+    "content": "This is my first post on Tribaverse!",
+    "userId": "user-uuid",
+    "createdAt": "2026-02-21T12:00:00.000Z"
+  }
+}
+```
+
+**Validation Rules:**
+
+- Content must not be empty
+- Content must be a string
+- Content must not exceed 1000 characters
+
+**Error Responses:**
+
+- `401 Unauthorized` - Missing or invalid token
+- `400 Bad Request` - Invalid input data
+
+---
+
+#### 4. Get All Posts (with Pagination)
+
+**GET** `/posts?page=1&limit=10`
+
+Retrieves a paginated list of all posts.
+
+**Query Parameters:**
+
+- `page` (optional): Page number (default: 1, min: 1)
+- `limit` (optional): Items per page (default: 10, min: 1, max: 100)
+
+**Response (200 OK):**
+
+```json
+{
+  "data": [
+    {
+      "id": "uuid-here",
+      "content": "This is my first post on Tribaverse!",
+      "createdAt": "2026-02-21T12:00:00.000Z",
+      "author": {
+        "id": "user-uuid",
+        "username": "johndoe",
+        "email": "user@example.com"
+      }
+    }
+  ],
+  "meta": {
+    "total": 25,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 3,
+    "hasNextPage": true,
+    "hasPreviousPage": false
+  }
+}
+```
+
+---
+
+### Example Usage with cURL
+
+#### Register
+
+```bash
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "password123",
+    "username": "testuser"
+  }'
+```
+
+#### Login
+
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "password123"
+  }'
+```
+
+#### Create Post
+
+```bash
+curl -X POST http://localhost:3000/posts \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "content": "My first post!"
+  }'
+```
+
+#### Get Posts
+
+```bash
+curl http://localhost:3000/posts?page=1&limit=10
+```
+
+## Project Structure
+
+```
+src/
+├── auth/
+│   ├── dto/
+│   │   ├── login.dto.ts          # Login validation
+│   │   └── register.dto.ts       # Registration validation
+│   ├── guards/
+│   │   └── jwt-auth.guard.ts     # JWT authentication guard
+│   ├── auth.controller.ts        # Auth endpoints
+│   ├── auth.module.ts            # Auth module configuration
+│   ├── auth.service.ts           # Auth business logic
+│   └── jwt.strategy.ts           # JWT strategy for Passport
+├── users/
+│   ├── entities/
+│   │   └── user.entity.ts        # User database model
+│   ├── users.module.ts           # Users module
+│   └── users.service.ts          # User operations
+├── posts/
+│   ├── dto/
+│   │   ├── create-post.dto.ts    # Post creation validation
+│   │   └── pagination.dto.ts     # Pagination parameters
+│   ├── entities/
+│   │   └── post.entity.ts        # Post database model
+│   ├── posts.controller.ts       # Posts endpoints
+│   ├── posts.module.ts           # Posts module
+│   └── posts.service.ts          # Posts business logic
+├── app.module.ts                 # Root module
+└── main.ts                       # Application entry point
+```
+
+## Design Decisions
+
+### 1. **Architecture**
+
+- **Modular Design**: Separated concerns into distinct modules (Auth, Users, Posts)
+- **Layered Architecture**: Controller → Service → Repository pattern
+- **Dependency Injection**: Leveraged NestJS's built-in DI container for loose coupling
+
+### 2. **Database Choice**
+
+- **SQLite (sql.js)**: Chosen for zero external dependencies and easy testing
+- **TypeORM**: Provides type-safe database operations and migrations
+- **Entities**: UUID primary keys for better scalability and security
+
+### 3. **Authentication**
+
+- **JWT Strategy**: Stateless authentication for scalability
+- **Bcrypt**: Industry-standard password hashing (10 rounds)
+- **Guards**: Reusable authentication middleware
+
+### 4. **Validation**
+
+- **DTOs with class-validator**: Type-safe request validation
+- **Transform Pipe**: Automatic type conversion for query parameters
+- **Whitelist**: Strips unknown properties for security
+
+### 5. **Error Handling**
+
+- **Built-in Exception Filters**: Consistent error responses
+- **HTTP Status Codes**: Proper RESTful status codes
+- **Validation Errors**: Detailed error messages for debugging
+
+### 6. **Pagination**
+
+- **Offset-based**: Simple and effective for this use case
+- **Metadata**: Includes total count, page info, and navigation flags
+- **Default Limits**: Prevents excessive data retrieval
+
+### 7. **Scalability Considerations**
+
+- **Stateless Auth**: JWT tokens enable horizontal scaling
+- **Database Indexes**: Foreign keys and unique constraints
+- **Eager Loading**: Optimized queries with relations
+- **Configuration**: Environment-based settings
+
+### 8. **Code Quality**
+
+- **TypeScript**: Static typing for better maintainability
+- **Separation of Concerns**: Each module has a single responsibility
+- **Clean Code**: Descriptive naming and small, focused functions
+
+---
+
+## Testing
+
+To run tests:
+
+```bash
+npm run test
+```
+
+---
+
+## Author
+
+**Samuel Nyamekesse**  
+Software Engineer
+
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is part of a coding assignment for Tribaverse.
